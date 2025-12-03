@@ -21,11 +21,13 @@ export const AuthProvider = ({ children }) => {
           setAuthToken(token);
      };
 
+     // clear token
      const clearToken = () => {
           tokenRef.current = null;
           clearAuthToken();
      };
 
+     // get token
      const getToken = () => tokenRef.current;
 
      // login flow
