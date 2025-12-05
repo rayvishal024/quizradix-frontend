@@ -3,7 +3,7 @@ import axios from "axios";
 import { getAuthToken, clearAuthToken } from "../shared/contexts/authToken.js";
 
 // base url for backend
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://quizradix-backend.onrender.com/";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
 
 // create api 
 const api = axios.create({
@@ -33,19 +33,16 @@ api.interceptors.response.use(
      
      (error) => {
           const status = error?.response?.status;
-
+  
           // status 401
           if (status === 401) {
 
                // clear module token immediately
                clearAuthToken();
 
-           try {
                     // If app is mounted, redirect to login page
                     window.location.href = "/login";
-               } catch (e) {
-                    // noop
-               }
+               
           }
           return Promise.reject(error);
      }
